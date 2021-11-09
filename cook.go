@@ -22,11 +22,16 @@ func (c Cook) work() {
 		var foodId = -1
 		var deliveryOrderId = -1
 		for i, order := range orderList.orderArr {
-			foodId = order.Items[0]
-			order.Items = append(order.Items[:0], order.Items[1:]...)
+			if len(order.Items) > 0 {
+				foodId = order.Items[0]
+				order.Items = append(order.Items[:0], order.Items[1:]...)
+			}
+
 			if foodId != -1 {
-				time.Sleep(time.Duration(menu[foodId].prepTime) * time.Second)
+				//time.Sleep(time.Duration(menu[foodId].prepTime) * time.Second)
+				time.Sleep(time.Second)
 				order.CookingDetails = append(order.CookingDetails, FoodDelivery{foodId, c.id})
+				fmt.Println("ready item: ", foodId, " by ", c.id)
 			} else {
 				deliveryOrderId = i
 			}
@@ -52,18 +57,20 @@ func deliver(delivery *Delivery) bool {
 		log.Fatal(marshallErr)
 	}
 
-	request, newRequestError := http.NewRequest(http.MethodPost, diningHallHost+"8001"+"/delivery", bytes.NewBuffer(requestBody))
+	request, newRequestError := http.NewRequest(http.MethodPost, diningHallHost+":8001"+"/delivery", bytes.NewBuffer(requestBody))
 	if newRequestError != nil {
 		fmt.Println("Could not create new request. Error:", newRequestError)
 		log.Fatal(newRequestError)
 	} else {
 		response, doError := http.DefaultClient.Do(request)
+		fmt.Println("Delivery attempt")
 		if doError != nil {
 			fmt.Println("ERROR Sending request. ERR:", doError)
 			log.Fatal(doError)
 		}
 		var responseBody = make([]byte, response.ContentLength)
 		response.Body.Read(responseBody)
+		fmt.Println("Response: ", string(responseBody))
 		if string(responseBody) != "OK" {
 			return false
 		}
@@ -72,10 +79,7 @@ func deliver(delivery *Delivery) bool {
 	return true
 }
 
-type CookList struct {
-	cookList 	  []*Cook
-	cookIdCounter int
-}
+
 
 var cookStaff = []Cook {{
 	rank: 		 1,

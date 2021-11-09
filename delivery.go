@@ -23,7 +23,7 @@ func newDelivery(order *Order) *Delivery {
 	ret.OrderId = order.OrderId
 	ret.TableId = order.TableId
 	var itemsArr []int
-	for _, detail := range ret.CookingDetails {
+	for _, detail := range order.CookingDetails {
 		itemsArr = append(itemsArr, detail.FoodId)
 	}
 	ret.Items = itemsArr
