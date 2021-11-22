@@ -39,6 +39,6 @@ func orderHandler(w http.ResponseWriter, r *http.Request) {
 	json.Unmarshal(responseBuffer, &order)
 	fmt.Fprintln(w,order)
 	orderList.orderArr = append(orderList.orderArr, &order)
-
+	fmt.Println("Order received: ", order.OrderId, order.Items, order.MaxWait)
 
 }

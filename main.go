@@ -10,28 +10,28 @@ var diningHallHost = "http://localhost"
 var receivedOrder Order
 var orderList OrderList
 
-var cookTest Cook
+var cookArr = cookStaff
+
+const stoveNum = 2
+const ovenNum = 2
 
 func main() {
 
 	args := os.Args
 
-	if len(args) > 1{
+	if len(args) > 1 {
 		//Set the docker internal host
 		diningHallHost = args[1]
 	}
 
-	fmt.Println("hello")
-	http.HandleFunc("/",responseHandler)
+	fmt.Println("Kitchen is up and running")
+	http.HandleFunc("/", responseHandler)
 	http.HandleFunc("/order", orderHandler)
-	http.HandleFunc("/send",sendHandler)
+	http.HandleFunc("/send", sendHandler)
 
-	go cookTest.work()
-
-	http.ListenAndServe(":8000",nil)
-
+	for _, cook := range cookArr {
+		go cook.work()
+	}
+	http.ListenAndServe(":8000", nil)
 
 }
-
-
-
