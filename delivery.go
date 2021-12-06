@@ -34,4 +34,3 @@ func newDelivery(order *Order) *Delivery {
 	ret.CookingDetails = order.CookingDetails
 	return ret
 }
-

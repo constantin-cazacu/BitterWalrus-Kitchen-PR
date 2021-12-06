@@ -7,7 +7,6 @@ import (
 )
 
 var diningHallHost = "http://localhost"
-var receivedOrder Order
 var orderList OrderList
 
 var cookArr = cookStaff

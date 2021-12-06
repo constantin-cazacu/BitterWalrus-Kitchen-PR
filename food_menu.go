@@ -20,5 +20,4 @@ var burger = Menu {9, "Burger", 15, 1, "oven"}
 var gyros = Menu {10, "Gyros", 15, 1, ""}
 
 var menu = []Menu{pizza, pizza, salad, zeama, sashimi, duck, waffles, aubergine, lasagna, burger, gyros}
-var apparatusToId = map[string]int{"": 0, "oven": 1, "stove": 2}
-var itToApparatus = map[int]string{0: "nil", 1: "oven", 2: "stove"}
+

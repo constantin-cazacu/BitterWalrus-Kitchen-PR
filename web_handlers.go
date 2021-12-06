@@ -9,7 +9,6 @@ import (
 
 func responseHandler(w http.ResponseWriter, r *http.Request){
 
-	fmt.Fprintln(w, "Last received order is:", receivedOrder)
 }
 
 
