@@ -65,7 +65,7 @@ func (c Cook) work() {
 					if apparatusArr != nil{
 						for i, _ := range *apparatusArr {
 							apparatus = &(*apparatusArr)[i]
-							if apparatus.busyFlag != true {
+							if apparatus.busyFlag == false {
 								apparatus.busyFlag = true
 								foundApparatus = true
 								break
@@ -89,6 +89,8 @@ func (c Cook) work() {
 					time.Sleep(time.Second * time.Duration(menu[foodId].prepTime))
 
 					orderList.mx.Lock()
+					orderList.orderArr[orderId].ItemCounter-=1
+
 					if foundApparatus == true {
 						apparatus.busyFlag = false
 						apparatus.prepareMutex.Unlock()
@@ -103,8 +105,10 @@ func (c Cook) work() {
 		waitGrp.Wait()
 
 		orderList.mx.Lock()
+
+
 		for i, order := range orderList.orderArr {
-			if len(order.Items) == 0 {
+			if order.ItemCounter == 0 {
 				completedDelivery := newDelivery(order)
 				orderStatus := deliver(completedDelivery)
 				if orderStatus != false {
@@ -154,14 +158,14 @@ var cookStaff = []Cook{{
 	proficiency: 3,
 	name:        "Master",
 	catchPhrase: "yes",
+}, {
+	id:          1,
+	rank:        1,
+	proficiency: 1,
+	name:        "Jeremy Clarkson",
+	catchPhrase: "Look at that! It's Brrrrilliant",
 },
 //{
-//	id:          1,
-//	rank:        1,
-//	proficiency: 1,
-//	name:        "Jeremy Clarkson",
-//	catchPhrase: "Look at that! It's Brrrrilliant",
-//}, {
 //	id:          2,
 //	rank:        1,
 //	proficiency: 3,
