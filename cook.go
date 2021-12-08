@@ -164,24 +164,23 @@ var cookStaff = []Cook{{
 	proficiency: 1,
 	name:        "Jeremy Clarkson",
 	catchPhrase: "Look at that! It's Brrrrilliant",
+}, {
+	id:          2,
+	rank:        1,
+	proficiency: 3,
+	name:        "Lewis Hamilton",
+	catchPhrase: "My tires are dead man",
+}, {
+	id:          3,
+	rank:        2,
+	proficiency: 2,
+	name:        "Cillian Murphy",
+	catchPhrase: "I think, that's what I do, so that you don't have to",
+}, {
+	id:          4,
+	rank:        3,
+	proficiency: 2,
+	name:        "Rowan Atkinson",
+	catchPhrase: "*grunts*",
 },
-//{
-//	id:          2,
-//	rank:        1,
-//	proficiency: 3,
-//	name:        "Lewis Hamilton",
-//	catchPhrase: "My tires are dead man",
-//}, {
-//	id:          3,
-//	rank:        2,
-//	proficiency: 2,
-//	name:        "Cillian Murphy",
-//	catchPhrase: "I think, that's what I do, so that you don't have to",
-//}, {
-//	id:          4,
-//	rank:        3,
-//	proficiency: 2,
-//	name:        "Rowan Atkinson",
-//	catchPhrase: "*grunts*",
-//},
 }

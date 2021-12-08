@@ -11,6 +11,7 @@ type Order struct {
 	MaxWait        int   `json:"max_wait"`
 	PickUpTime     int64 `json:"pick_up_time"`
 	CookingDetails []FoodDelivery
+	ItemCounter    int
 }
 
 type OrderList struct {
